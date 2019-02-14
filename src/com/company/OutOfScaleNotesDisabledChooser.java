@@ -19,8 +19,6 @@ public class OutOfScaleNotesDisabledChooser extends Chooser{
         setItems(getOptions());
         setValue("false");
 
-
-        // moves pitches on the whole key board
         setOnAction(event -> {
             OptionsHolder.setOutOfScaleNotesDisabled(Boolean.parseBoolean((String)getValue()));
             MusicPlayer.updateAllNotePanes();

@@ -20,7 +20,6 @@ public class ScaleChooser extends Chooser {
         setItems(getOptions());
         setValue("Major");
 
-        // moves pitches on the whole key board
         setOnAction(event -> {
             OptionsHolder.setCurrentScale(OptionsHolder.nameTointArray((String)getValue()));
             MusicPlayer.updateAllNotePanes();

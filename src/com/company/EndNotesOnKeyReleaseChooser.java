@@ -19,8 +19,6 @@ public class EndNotesOnKeyReleaseChooser extends Chooser {
         setItems(getOptions());
         setValue("true");
 
-
-        // moves pitches on the whole key board
         setOnAction(event -> {
             OptionsHolder.setEndNotesOnKeyRelease(Boolean.parseBoolean((String)getValue()));
             MusicPlayer.updateAllNotePanes();

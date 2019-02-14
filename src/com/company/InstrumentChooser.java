@@ -19,7 +19,6 @@ public class InstrumentChooser extends Chooser {
         setItems(getOptions());
         setValue("1");
 
-        // moves pitches on the whole key board
         setOnAction(event -> {
             MusicPlayer.changeInstrument(Integer.parseInt((String)getValue()));
             MusicPlayer.updateAllNotePanes();

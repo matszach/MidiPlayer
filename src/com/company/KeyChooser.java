@@ -24,8 +24,6 @@ public class KeyChooser extends Chooser{
         setItems(getOptions());
         setValue("C");
 
-
-        // moves pitches on the whole key board
         setOnAction(event -> {
             OptionsHolder.setCurrentKeyNum(OptionsHolder.symbolToNoteNum((String)getValue()));
             MusicPlayer.updateAllNotePanes();
