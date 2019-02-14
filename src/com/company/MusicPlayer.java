@@ -78,6 +78,29 @@ public class MusicPlayer extends Application {
     // notes in order                      :  C  C# D  D# E  F  F# G  G# A  A#  B   C
     // corresponding note nums modifiers   :  0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12
 
+    private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
+        for(int i = 0; i<notePanesRow.length; i++){
+            notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i], channel);
+        }
+    }
+    private static void placeNotePaneRow(NotePane[] notePanesRow, double originX, double originY){
+        for(int i = 0; i<notePanesRow.length; i++){
+            notePanesRow[i].relocate(originX+(NotePane.SIDE_LENGTH+5)*i, originY);
+            root.getChildren().add(notePanesRow[i]);
+        }
+    }
+
+    static {
+        buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
+        placeNotePaneRow(notePanesRow1, 45,170);
+        buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
+        placeNotePaneRow(notePanesRow2, 70,225);
+        buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
+        placeNotePaneRow(notePanesRow3, 85,280);
+        buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
+        placeNotePaneRow(notePanesRow4, 110,335);
+    }
+
     // pitch chooser
     private static Text pitchChooserLabel = new Text("Pitch offset");
     private static PitchChooser pitchChooser = new PitchChooser();
@@ -132,29 +155,16 @@ public class MusicPlayer extends Application {
         root.getChildren().addAll(outOfScaleNotesDisabledChooserLabel, outOfScaleNotesDisabledChooser);
     }
 
-
-    private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
-        for(int i = 0; i<notePanesRow.length; i++){
-            notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i], channel);
-        }
-    }
-    private static void placeNotePaneRow(NotePane[] notePanesRow, double originX, double originY){
-        for(int i = 0; i<notePanesRow.length; i++){
-            notePanesRow[i].relocate(originX+(NotePane.SIDE_LENGTH+5)*i, originY);
-            root.getChildren().add(notePanesRow[i]);
-        }
-    }
-
+    // velocity of the note released
+    private static Text velocityChooserLabel = new Text("Note velocity");
+    private static VelocityChooser velocityChooser = new VelocityChooser();
     static {
-        buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
-        placeNotePaneRow(notePanesRow1, 45,170);
-        buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
-        placeNotePaneRow(notePanesRow2, 70,225);
-        buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
-        placeNotePaneRow(notePanesRow3, 85,280);
-        buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
-        placeNotePaneRow(notePanesRow4, 110,335);
+        velocityChooserLabel.relocate(220,90);
+        velocityChooser.relocate(220,110);
+        root.getChildren().addAll(velocityChooserLabel,velocityChooser);
     }
+
+
 
     // updates all NotePanes after a change in the options
     public static void updateAllNotePanes(){

@@ -17,7 +17,7 @@ public class PitchChooser extends Chooser {
         super();
         setPrefWidth(60);
         setItems(getOptions());
-        setValue("0");
+        setValue(getOptions().get(getOptions().size()/2));
 
         // moves pitches on the whole key board
         setOnAction(event -> {

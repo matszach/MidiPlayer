@@ -17,7 +17,7 @@ public class OutOfScaleNotesDisabledChooser extends Chooser{
         super();
         setPrefWidth(150);
         setItems(getOptions());
-        setValue("false");
+        setValue(getOptions().get(1));
 
         setOnAction(event -> {
             OptionsHolder.setOutOfScaleNotesDisabled(Boolean.parseBoolean((String)getValue()));

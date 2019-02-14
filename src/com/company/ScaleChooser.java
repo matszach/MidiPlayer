@@ -18,7 +18,7 @@ public class ScaleChooser extends Chooser {
         super();
         setPrefWidth(150);
         setItems(getOptions());
-        setValue("Major");
+        setValue(getOptions().get(0));
 
         setOnAction(event -> {
             OptionsHolder.setCurrentScale(OptionsHolder.nameTointArray((String)getValue()));

@@ -26,7 +26,7 @@ public class InstrumentChooser extends Chooser {
         super();
         setPrefWidth(150);
         setItems(getOptions());
-        setValue("0");
+        setValue(getOptions().get(0));
 
         setOnAction(event -> {
             MusicPlayer.changeInstrument(extractInstrumentNumber());

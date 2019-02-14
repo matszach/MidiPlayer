@@ -50,7 +50,7 @@ public class NotePane extends Pane {
             if(!isInCurrentScale() && OptionsHolder.areOutOfScaleNotesDisabled()){
                 return;
             }
-            midiChannel.noteOn(getNotePlayed(), 120);
+            midiChannel.noteOn(getNotePlayed(), OptionsHolder.getNoteVelocity());
             setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
             setEffect(new DropShadow(DS_RADII, getOnColor()));
         }

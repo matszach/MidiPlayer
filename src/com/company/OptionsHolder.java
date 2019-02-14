@@ -7,11 +7,13 @@ public class OptionsHolder {
     // a value divisible by 12 here makes the lowest note (corresponding to the "Z" key) a C
     private static int baseNoteValue = 48;
     public static void adjustBaseNoteValue(int adjustment) {
-        OptionsHolder.baseNoteValue = 48+adjustment;
+        OptionsHolder.noteVelocity = 48+adjustment;
     }
     public static int getBaseNoteValue() {
         return baseNoteValue;
     }
+
+
 
     // key number to be added to current scale numbers when determining what keyboard keys should be marked as in-scale (blue)
     private static int currentKeyNum = 0;
@@ -93,6 +95,17 @@ public class OptionsHolder {
             MusicPlayer.silienceAll();
         }
     }
+
+    // Note velocity
+    private static int noteVelocity = 100;
+    public static void setNoteVelocity(int noteVelocity) {
+        OptionsHolder.noteVelocity = noteVelocity;
+    }
+    public static int getNoteVelocity() {
+        return noteVelocity;
+    }
+
+
 
     private OptionsHolder(){}
     private static OptionsHolder optionsHolder = new OptionsHolder();

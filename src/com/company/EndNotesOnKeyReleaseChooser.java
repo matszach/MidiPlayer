@@ -17,7 +17,7 @@ public class EndNotesOnKeyReleaseChooser extends Chooser {
         super();
         setPrefWidth(130);
         setItems(getOptions());
-        setValue("true");
+        setValue(getOptions().get(0));
 
         setOnAction(event -> {
             OptionsHolder.setEndNotesOnKeyRelease(Boolean.parseBoolean((String)getValue()));
