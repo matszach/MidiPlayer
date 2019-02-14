@@ -7,7 +7,7 @@ public class OptionsHolder {
     // a value divisible by 12 here makes the lowest note (corresponding to the "Z" key) a C
     private static int baseNoteValue = 48;
     public static void adjustBaseNoteValue(int adjustment) {
-        OptionsHolder.noteVelocity = 48+adjustment;
+        OptionsHolder.baseNoteValue = 48+adjustment;
     }
     public static int getBaseNoteValue() {
         return baseNoteValue;
