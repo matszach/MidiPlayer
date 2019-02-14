@@ -22,7 +22,7 @@ public class NotePane extends Pane {
     private Text noteSymbolText = new Text();
     private String decideNoteSymbol(){
         int noteNumDivRest = (noteNum + OptionsHolder.getBaseNoteValue()) % 12;
-        return Scales.getNoteSymbols()[noteNumDivRest];
+        return OptionsHolder.getNoteSymbols()[noteNumDivRest];
     }
 
     // note number for note to be emitted
@@ -57,8 +57,8 @@ public class NotePane extends Pane {
 
     // checks if the note-to-be-played is in the current scale
     private boolean isInCurrentScale(){
-        for(int i : Scales.getCurrentScale()){
-            if(i == getNotePlayed()%12){
+        for(int i : OptionsHolder.getCurrentScale()){
+            if(i == (getNotePlayed()-OptionsHolder.getCurrentKeyNum())%12){
                 return true;
             }
         }
@@ -81,6 +81,12 @@ public class NotePane extends Pane {
         }
     }
 
+
+    // updates display after changes
+    public void updateDisplay(){
+        setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+        noteSymbolText.setText(decideNoteSymbol());
+    }
 
 
     public NotePane(char keyChar, int noteNum, MidiChannel channel){

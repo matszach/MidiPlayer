@@ -8,6 +8,13 @@ import javafx.scene.input.KeyCombination;
 
 public class KeyMapper {
 
+    // note characters to be put on NotePanes
+    public final static char[] NOTE_CHARS_ROW_1 ={'1','2','3','4','5','6','7','8','9','0','-','='};
+    public final static char[] NOTE_CHARS_ROW_2 ={'Q','W','E','R','T','Y','U','I','O','P','[',']'};
+    public final static char[] NOTE_CHARS_ROW_3 ={'A','S','D','F','G','H','J','K','L',';','\''};
+    public final static char[] NOTE_CHARS_ROW_4 ={'Z','X','C','V','B','N','M',',','.','/'};
+
+    // key-combinations to be mapped to NotePanes
     private final static KeyCombination[] KEY_COMBINATIONS_ROW_1 = new KeyCombination[12];
     private final static KeyCombination[] KEY_COMBINATIONS_ROW_2 = new KeyCombination[12];
     private final static KeyCombination[] KEY_COMBINATIONS_ROW_3 = new KeyCombination[11];

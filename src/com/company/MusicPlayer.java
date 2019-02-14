@@ -3,12 +3,10 @@ package com.company;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.sound.midi.MidiChannel;
@@ -19,7 +17,7 @@ import javax.sound.midi.Synthesizer;
 public class MusicPlayer extends Application {
 
     // root pane, the background of the app
-    private static Pane root;
+    private static Pane root = new Pane();
 
     // synthesizer and music channels for each row of NotePanes
     // (to allow 2 instances of the same note to be played at the same time)
@@ -35,12 +33,6 @@ public class MusicPlayer extends Application {
     public static NotePane[] notePanesRow3 = new NotePane[11];
     public static NotePane[] notePanesRow4 = new NotePane[10];
 
-    // note characters to be put on NotePanes
-    private static char[] noteCharsRow1 ={'1','2','3','4','5','6','7','8','9','0','-','='};
-    private static char[] noteCharsRow2 ={'Q','W','E','R','T','Y','U','I','O','P','[',']'};
-    private static char[] noteCharsRow3 ={'A','S','D','F','G','H','J','K','L',';','\''};
-    private static char[] noteCharsRow4 ={'Z','X','C','V','B','N','M',',','.','/'};
-
     // note numbers to be passed to NotePanes after adding the baseNoteValue to it
     private static int[] noteNumsRow1 ={15,16,17,18,19,20,21,22,23,24,25,26};
     private static int[] noteNumsRow2 ={10,11,12,13,14,15,16,17,18,19,20,21};
@@ -50,11 +42,35 @@ public class MusicPlayer extends Application {
     // notes in order                      :  C  C# D  D# E  F  F# G  G# A  A#  B   C
     // corresponding note nums modifiers   :  0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12
 
+    // pitch chooser
+    private static Text pitchChooserLabel = new Text("Pitch offset");
+    private static PitchChooser pitchChooser = new PitchChooser();
+    static {
+        pitchChooserLabel.relocate(50,50);
+        pitchChooser.relocate(50, 70);
+        root.getChildren().addAll(pitchChooserLabel,pitchChooser);
+    }
 
+    // key chooser
+    private static Text keyChooserLabel = new Text("Key");
+    private static KeyChooser keyChooser = new KeyChooser();
+    static {
+        keyChooserLabel.relocate(130,50);
+        keyChooser.relocate(130, 70);
+        root.getChildren().addAll(keyChooserLabel,keyChooser);
+    }
+
+    // scale chooser
+    private static Text scaleChooserLabel = new Text("Scale");
+    private static ScaleChooser scaleChooser = new ScaleChooser();
+    static {
+        scaleChooserLabel.relocate(210,50);
+        scaleChooser.relocate(210, 70);
+        root.getChildren().addAll(scaleChooserLabel,scaleChooser);
+    }
 
     // init. root, synthesizer and channels
     static {
-        root = new Pane();
         root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GRUE, null, null)));
 
         try {
@@ -81,28 +97,40 @@ public class MusicPlayer extends Application {
         }
     }
 
+    static {
+        buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
+        placeNotePaneRow(notePanesRow1, 45,170);
+        buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
+        placeNotePaneRow(notePanesRow2, 70,225);
+        buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
+        placeNotePaneRow(notePanesRow3, 85,280);
+        buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
+        placeNotePaneRow(notePanesRow4, 110,335);
+    }
+
+    // updates all NotePanes after a change in the options
+    public static void updateAllNotePanes(){
+        for(NotePane np : notePanesRow1){
+            np.updateDisplay();
+        }
+        for(NotePane np : notePanesRow2){
+            np.updateDisplay();
+        }
+        for(NotePane np : notePanesRow3){
+            np.updateDisplay();
+        }
+        for(NotePane np : notePanesRow4){
+            np.updateDisplay();
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
-
         primaryStage.setScene(new Scene(root, 780,420));
         primaryStage.setResizable(false);
         primaryStage.show();
 
-
-        buildNotePaneRow(notePanesRow1, noteCharsRow1, noteNumsRow1, channel1);
-        placeNotePaneRow(notePanesRow1, 45,170);
-
-        buildNotePaneRow(notePanesRow2, noteCharsRow2, noteNumsRow2, channel2);
-        placeNotePaneRow(notePanesRow2, 70,225);
-
-        buildNotePaneRow(notePanesRow3, noteCharsRow3, noteNumsRow3, channel3);
-        placeNotePaneRow(notePanesRow3, 85,280);
-
-        buildNotePaneRow(notePanesRow4, noteCharsRow4, noteNumsRow4, channel4);
-        placeNotePaneRow(notePanesRow4, 110,335);
-
         KeyMapper.mapKeys(primaryStage.getScene());
-
 
     }
 
