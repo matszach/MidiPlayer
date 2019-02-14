@@ -1,5 +1,6 @@
 package com.company;
 
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -10,6 +11,9 @@ import javafx.scene.text.Text;
 import javax.sound.midi.MidiChannel;
 
 public class NotePane extends Pane {
+
+    // Drop shadow radii
+    private final static double DS_RADII = 8;
 
     // final static appearance values
     public static final int SIDE_LENGTH = 50;
@@ -42,6 +46,7 @@ public class NotePane extends Pane {
         if(!isOn){
             midiChannel.noteOn(getNotePlayed(), 120);
             setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
+            setEffect(new DropShadow(DS_RADII, getOnColor()));
             isOn = true;
         }
     }
@@ -51,6 +56,7 @@ public class NotePane extends Pane {
         if(isOn){
             midiChannel.noteOff(getNotePlayed());
             setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+            setEffect(new DropShadow(DS_RADII, getOffColor()));
             isOn = false;
         }
     }
@@ -85,6 +91,7 @@ public class NotePane extends Pane {
     // updates display after changes
     public void updateDisplay(){
         setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+        setEffect(new DropShadow(DS_RADII, getOffColor()));
         noteSymbolText.setText(decideNoteSymbol());
     }
 
@@ -96,6 +103,7 @@ public class NotePane extends Pane {
 
         setPrefSize(SIDE_LENGTH, SIDE_LENGTH);
         setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+        setEffect(new DropShadow(DS_RADII, getOffColor()));
 
         getChildren().addAll(keyCharText, noteSymbolText);
 
