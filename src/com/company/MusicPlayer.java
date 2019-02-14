@@ -27,6 +27,13 @@ public class MusicPlayer extends Application {
     private static MidiChannel channel3;
     private static MidiChannel channel4;
 
+    public static void changeInstrument(int instrumentNum){
+        channel1.programChange(instrumentNum);
+        channel2.programChange(instrumentNum);
+        channel3.programChange(instrumentNum);
+        channel4.programChange(instrumentNum);
+    }
+
     // panels divided in rows
     public static NotePane[] notePanesRow1 = new NotePane[12];
     public static NotePane[] notePanesRow2 = new NotePane[12];
@@ -46,8 +53,8 @@ public class MusicPlayer extends Application {
     private static Text pitchChooserLabel = new Text("Pitch offset");
     private static PitchChooser pitchChooser = new PitchChooser();
     static {
-        pitchChooserLabel.relocate(50,50);
-        pitchChooser.relocate(50, 70);
+        pitchChooserLabel.relocate(50,30);
+        pitchChooser.relocate(50, 50);
         root.getChildren().addAll(pitchChooserLabel,pitchChooser);
     }
 
@@ -55,8 +62,8 @@ public class MusicPlayer extends Application {
     private static Text keyChooserLabel = new Text("Key");
     private static KeyChooser keyChooser = new KeyChooser();
     static {
-        keyChooserLabel.relocate(130,50);
-        keyChooser.relocate(130, 70);
+        keyChooserLabel.relocate(130,30);
+        keyChooser.relocate(130, 50);
         root.getChildren().addAll(keyChooserLabel,keyChooser);
     }
 
@@ -64,9 +71,18 @@ public class MusicPlayer extends Application {
     private static Text scaleChooserLabel = new Text("Scale");
     private static ScaleChooser scaleChooser = new ScaleChooser();
     static {
-        scaleChooserLabel.relocate(210,50);
-        scaleChooser.relocate(210, 70);
+        scaleChooserLabel.relocate(210,30);
+        scaleChooser.relocate(210, 50);
         root.getChildren().addAll(scaleChooserLabel,scaleChooser);
+    }
+
+    // instrument chooser
+    private static Text instrumentChooserLabel = new Text("Instrument");
+    private static InstrumentChooser instrumentChooser = new InstrumentChooser();
+    static {
+        instrumentChooserLabel.relocate(380,30);
+        instrumentChooser.relocate(380, 50);
+        root.getChildren().addAll(instrumentChooserLabel,instrumentChooser);
     }
 
     // init. root, synthesizer and channels

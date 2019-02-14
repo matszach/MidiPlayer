@@ -2,12 +2,9 @@ package com.company;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 
-public class ScaleChooser extends ComboBox {
+
+public class ScaleChooser extends Chooser {
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
@@ -18,9 +15,8 @@ public class ScaleChooser extends ComboBox {
     }
 
     public ScaleChooser(){
-        setPrefHeight(25);
+        super();
         setPrefWidth(150);
-        setBackground(new Background(new BackgroundFill(ColorPalette.CONTROLS_LIGHT_GREEN,new CornerRadii(5), null)));
         setItems(getOptions());
         setValue("Major");
 

@@ -3,25 +3,25 @@ package com.company;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class PitchChooser extends Chooser {
+public class InstrumentChooser extends Chooser {
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
-        for(int i = -36; i <= 36; i++){
+        for(int i = 1; i <= 128; i++){
             values.add(""+i);
         }
         return values;
     }
 
-    public PitchChooser(){
+    public InstrumentChooser(){
         super();
-        setPrefWidth(60);
+        setPrefWidth(150);
         setItems(getOptions());
-        setValue("0");
+        setValue("1");
 
         // moves pitches on the whole key board
         setOnAction(event -> {
-            OptionsHolder.adjustBaseNoteValue(Integer.parseInt((String)getValue()));
+            MusicPlayer.changeInstrument(Integer.parseInt((String)getValue()));
             MusicPlayer.updateAllNotePanes();
         });
 

@@ -47,6 +47,8 @@ public class NotePane extends Pane {
             midiChannel.noteOn(getNotePlayed(), 120);
             setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
             setEffect(new DropShadow(DS_RADII, getOnColor()));
+            setScaleX(0.95);
+            setScaleY(0.95);
             isOn = true;
         }
     }
@@ -57,6 +59,8 @@ public class NotePane extends Pane {
             midiChannel.noteOff(getNotePlayed());
             setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
             setEffect(new DropShadow(DS_RADII, getOffColor()));
+            setScaleX(1);
+            setScaleY(1);
             isOn = false;
         }
     }

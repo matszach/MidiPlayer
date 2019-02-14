@@ -7,7 +7,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 
-public class KeyChooser extends ComboBox {
+public class KeyChooser extends Chooser{
 
 
     private static ObservableList<String> getOptions(){
@@ -19,11 +19,11 @@ public class KeyChooser extends ComboBox {
     }
 
     public KeyChooser(){
-        setPrefHeight(25);
+        super();
         setPrefWidth(60);
-        setBackground(new Background(new BackgroundFill(ColorPalette.CONTROLS_LIGHT_GREEN,new CornerRadii(5), null)));
         setItems(getOptions());
         setValue("C");
+
 
         // moves pitches on the whole key board
         setOnAction(event -> {
