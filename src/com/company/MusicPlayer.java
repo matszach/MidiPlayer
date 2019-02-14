@@ -42,17 +42,20 @@ public class MusicPlayer extends Application {
     private static char[] noteCharsRow4 ={'Z','X','C','V','B','N','M',',','.','/'};
 
     // note numbers to be passed to NotePanes after adding the baseNoteValue to it
-    private static int baseNoteValue = 45;
     private static int[] noteNumsRow1 ={15,16,17,18,19,20,21,22,23,24,25,26};
     private static int[] noteNumsRow2 ={10,11,12,13,14,15,16,17,18,19,20,21};
     private static int[] noteNumsRow3 ={5,6,7,8,9,10,11,12,13,14,15};
     private static int[] noteNumsRow4 ={0,1,2,3,4,5,6,7,8,9};
 
+    // notes in order                      :  C  C# D  D# E  F  F# G  G# A  A#  B   C
+    // corresponding note nums modifiers   :  0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12
+
+
 
     // init. root, synthesizer and channels
     static {
         root = new Pane();
-        root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GREEN, null, null)));
+        root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GRUE, null, null)));
 
         try {
             synthesizer = MidiSystem.getSynthesizer();
@@ -68,7 +71,7 @@ public class MusicPlayer extends Application {
 
     private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
         for(int i = 0; i<notePanesRow.length; i++){
-            notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i]+baseNoteValue, channel);
+            notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i], channel);
         }
     }
     private static void placeNotePaneRow(NotePane[] notePanesRow, double originX, double originY){

@@ -4,6 +4,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javax.sound.midi.MidiChannel;
@@ -17,8 +18,18 @@ public class NotePane extends Pane {
     // "what-button-to-press" label
     private Text keyCharText = new Text();
 
+    // "what-note-will-be-played" label
+    private Text noteSymbolText = new Text();
+    private String decideNoteSymbol(){
+        int noteNumDivRest = (noteNum + OptionsHolder.getBaseNoteValue()) % 12;
+        return Scales.getNoteSymbols()[noteNumDivRest];
+    }
+
     // note number for note to be emitted
     private int noteNum;
+    private int getNotePlayed(){
+        return noteNum+OptionsHolder.getBaseNoteValue();
+    }
 
     // midi channel for for the note to be played on
     private MidiChannel midiChannel;
@@ -29,8 +40,8 @@ public class NotePane extends Pane {
     // lets out the midi note and highlights the NotePane
     public void noteOn(){
         if(!isOn){
-            midiChannel.noteOn(noteNum, 200);
-            setBackground(new Background(new BackgroundFill(ColorPalette.BTN_ON_GREEN, PANE_RADII, null)));
+            midiChannel.noteOn(getNotePlayed(), 120);
+            setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
             isOn = true;
         }
     }
@@ -38,9 +49,35 @@ public class NotePane extends Pane {
     // stops the note and un-highlights the NotePAne
     public void noteOff(){
         if(isOn){
-            midiChannel.noteOff(noteNum);
-            setBackground(new Background(new BackgroundFill(ColorPalette.BTN_OFF_GREEN, PANE_RADII, null)));
+            midiChannel.noteOff(getNotePlayed());
+            setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
             isOn = false;
+        }
+    }
+
+    // checks if the note-to-be-played is in the current scale
+    private boolean isInCurrentScale(){
+        for(int i : Scales.getCurrentScale()){
+            if(i == getNotePlayed()%12){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // decide color
+    private Color getOnColor(){
+        if(isInCurrentScale()){
+            return ColorPalette.BTN_ON_BLUE;
+        } else {
+            return ColorPalette.BTN_ON_GREEN;
+        }
+    }
+    private Color getOffColor(){
+        if(isInCurrentScale()){
+            return ColorPalette.BTN_OFF_BLUE;
+        } else {
+            return ColorPalette.BTN_OFF_GREEN;
         }
     }
 
@@ -48,15 +85,22 @@ public class NotePane extends Pane {
 
     public NotePane(char keyChar, int noteNum, MidiChannel channel){
 
-        setPrefSize(SIDE_LENGTH, SIDE_LENGTH);
-        setBackground(new Background(new BackgroundFill(ColorPalette.BTN_OFF_GREEN, PANE_RADII, null)));
-
-        keyCharText.setText(""+keyChar);
-        keyCharText.relocate(2,2);
-        getChildren().add(keyCharText);
-
         this.noteNum = noteNum;
         this.midiChannel = channel;
+
+        setPrefSize(SIDE_LENGTH, SIDE_LENGTH);
+        setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+
+        getChildren().addAll(keyCharText, noteSymbolText);
+
+        keyCharText.setText(""+keyChar);
+        keyCharText.relocate(3,0);
+        keyCharText.setStyle(" -fx-font-size: 10;");
+        keyCharText.setFill(Color.LIGHTGRAY);
+
+        noteSymbolText.setText(decideNoteSymbol());
+        noteSymbolText.relocate(15,22);
+        noteSymbolText.setStyle(" -fx-font-size: 22;");
 
         setOnMousePressed(e->{
             if(!e.isPrimaryButtonDown()){

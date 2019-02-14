@@ -15,7 +15,6 @@ public class KeyMapper {
 
     static {
 
-
         KEY_COMBINATIONS_ROW_1[0] = new KeyCodeCombination(KeyCode.DIGIT1);
         KEY_COMBINATIONS_ROW_1[1] = new KeyCodeCombination(KeyCode.DIGIT2);
         KEY_COMBINATIONS_ROW_1[2] = new KeyCodeCombination(KeyCode.DIGIT3);
@@ -65,13 +64,7 @@ public class KeyMapper {
         KEY_COMBINATIONS_ROW_4[8] = new KeyCodeCombination(KeyCode.PERIOD);
         KEY_COMBINATIONS_ROW_4[9] = new KeyCodeCombination(KeyCode.SLASH);
 
-
-
-
-
     }
-
-
 
 
 
