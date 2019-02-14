@@ -73,6 +73,14 @@ public class OptionsHolder {
         return currentScale;
     }
 
+    // Notes out of scale disabled
+    private static boolean outOfScaleNotesDisabled = false;
+    public static boolean areOutOfScaleNotesDisabled() {
+        return outOfScaleNotesDisabled;
+    }
+    public static void setOutOfScaleNotesDisabled(boolean outOfScaleNotesDisabled) {
+        OptionsHolder.outOfScaleNotesDisabled = outOfScaleNotesDisabled;
+    }
 
 
     private OptionsHolder(){}

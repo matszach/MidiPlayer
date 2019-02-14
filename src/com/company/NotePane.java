@@ -44,6 +44,9 @@ public class NotePane extends Pane {
     // lets out the midi note and highlights the NotePane
     public void noteOn(){
         if(!isOn){
+            if(!isInCurrentScale() && OptionsHolder.areOutOfScaleNotesDisabled()){
+                return;
+            }
             midiChannel.noteOn(getNotePlayed(), 120);
             setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
             setEffect(new DropShadow(DS_RADII, getOnColor()));

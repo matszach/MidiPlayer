@@ -85,6 +85,15 @@ public class MusicPlayer extends Application {
         root.getChildren().addAll(instrumentChooserLabel,instrumentChooser);
     }
 
+    // notes out of scale disable chooser
+    private static Text outOfScaleNotesDisabledChooserLabel = new Text("Out of scale notes disabled");
+    private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser();
+    static {
+        outOfScaleNotesDisabledChooserLabel.relocate(50,90);
+        outOfScaleNotesDisabledChooser.relocate(50, 110);
+        root.getChildren().addAll(outOfScaleNotesDisabledChooserLabel, outOfScaleNotesDisabledChooser);
+    }
+
     // init. root, synthesizer and channels
     static {
         root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GRUE, null, null)));
