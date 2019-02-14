@@ -34,6 +34,15 @@ public class MusicPlayer extends Application {
         channel4.programChange(instrumentNum);
     }
 
+    // silences all ongoing notes
+    public static void silienceAll(){
+        channel1.allSoundOff();
+        channel2.allSoundOff();
+        channel3.allSoundOff();
+        channel4.allSoundOff();
+
+    }
+
     // panels divided in rows
     public static NotePane[] notePanesRow1 = new NotePane[12];
     public static NotePane[] notePanesRow2 = new NotePane[12];
@@ -85,6 +94,15 @@ public class MusicPlayer extends Application {
         root.getChildren().addAll(instrumentChooserLabel,instrumentChooser);
     }
 
+    // end notes on key release chooser
+    private static Text endNotesOnKeyReleaseChooserLabel = new Text("End note on key release");
+    private static EndNotesOnKeyReleaseChooser endNotesOnKeyReleaseChooser = new EndNotesOnKeyReleaseChooser();
+    static {
+        endNotesOnKeyReleaseChooserLabel.relocate(550,30);
+        endNotesOnKeyReleaseChooser.relocate(550, 50);
+        root.getChildren().addAll(endNotesOnKeyReleaseChooserLabel, endNotesOnKeyReleaseChooser);
+    }
+
     // notes out of scale disable chooser
     private static Text outOfScaleNotesDisabledChooserLabel = new Text("Out of scale notes disabled");
     private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser();
@@ -93,6 +111,8 @@ public class MusicPlayer extends Application {
         outOfScaleNotesDisabledChooser.relocate(50, 110);
         root.getChildren().addAll(outOfScaleNotesDisabledChooserLabel, outOfScaleNotesDisabledChooser);
     }
+
+
 
     // init. root, synthesizer and channels
     static {

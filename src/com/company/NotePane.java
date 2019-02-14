@@ -44,27 +44,29 @@ public class NotePane extends Pane {
     // lets out the midi note and highlights the NotePane
     public void noteOn(){
         if(!isOn){
+            setScaleX(0.95);
+            setScaleY(0.95);
+            isOn = true;
             if(!isInCurrentScale() && OptionsHolder.areOutOfScaleNotesDisabled()){
                 return;
             }
             midiChannel.noteOn(getNotePlayed(), 120);
             setBackground(new Background(new BackgroundFill(getOnColor(), PANE_RADII, null)));
             setEffect(new DropShadow(DS_RADII, getOnColor()));
-            setScaleX(0.95);
-            setScaleY(0.95);
-            isOn = true;
         }
     }
 
     // stops the note and un-highlights the NotePAne
     public void noteOff(){
         if(isOn){
-            midiChannel.noteOff(getNotePlayed());
-            setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
-            setEffect(new DropShadow(DS_RADII, getOffColor()));
             setScaleX(1);
             setScaleY(1);
             isOn = false;
+            if(OptionsHolder.isEndNotesOnKeyRelease()){
+                midiChannel.noteOff(getNotePlayed());
+            }
+            setBackground(new Background(new BackgroundFill(getOffColor(), PANE_RADII, null)));
+            setEffect(new DropShadow(DS_RADII, getOffColor()));
         }
     }
 

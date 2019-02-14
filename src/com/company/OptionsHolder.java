@@ -82,6 +82,17 @@ public class OptionsHolder {
         OptionsHolder.outOfScaleNotesDisabled = outOfScaleNotesDisabled;
     }
 
+    // Cut notes short on key release
+    private static boolean endNotesOnKeyRelease = true;
+    public static boolean isEndNotesOnKeyRelease() {
+        return endNotesOnKeyRelease;
+    }
+    public static void setEndNotesOnKeyRelease(boolean endNotesOnKeyRelease) {
+        OptionsHolder.endNotesOnKeyRelease = endNotesOnKeyRelease;
+        if(endNotesOnKeyRelease){
+            MusicPlayer.silienceAll();
+        }
+    }
 
     private OptionsHolder(){}
     private static OptionsHolder optionsHolder = new OptionsHolder();
