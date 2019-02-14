@@ -129,6 +129,9 @@ public class NotePane extends Pane {
             if(!e.isPrimaryButtonDown()){
                 return;
             }
+            if(e.isSecondaryButtonDown()){
+                return;
+            }
             e.setDragDetect(true);
             noteOn();
         });

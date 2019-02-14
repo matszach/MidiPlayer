@@ -22,10 +22,30 @@ public class MusicPlayer extends Application {
     // synthesizer and music channels for each row of NotePanes
     // (to allow 2 instances of the same note to be played at the same time)
     private static Synthesizer synthesizer;
+    public static Synthesizer getSynthesizer() {
+        return synthesizer;
+    }
+
     private static MidiChannel channel1;
     private static MidiChannel channel2;
     private static MidiChannel channel3;
     private static MidiChannel channel4;
+
+    // init. root, synthesizer and channels
+    static {
+        root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GRUE, null, null)));
+
+        try {
+            synthesizer = MidiSystem.getSynthesizer();
+            synthesizer.open();
+            channel1 = synthesizer.getChannels()[0];
+            channel2 = synthesizer.getChannels()[1];
+            channel3 = synthesizer.getChannels()[2];
+            channel4 = synthesizer.getChannels()[3];
+        } catch (MidiUnavailableException e){
+            e.printStackTrace();
+        }
+    }
 
     public static void changeInstrument(int instrumentNum){
         channel1.programChange(instrumentNum);
@@ -113,23 +133,6 @@ public class MusicPlayer extends Application {
     }
 
 
-
-    // init. root, synthesizer and channels
-    static {
-        root.setBackground(new Background(new BackgroundFill(ColorPalette.BCG_LIGHT_GRUE, null, null)));
-
-        try {
-            synthesizer = MidiSystem.getSynthesizer();
-            synthesizer.open();
-            channel1 = synthesizer.getChannels()[0];
-            channel2 = synthesizer.getChannels()[1];
-            channel3 = synthesizer.getChannels()[2];
-            channel4 = synthesizer.getChannels()[3];
-        } catch (MidiUnavailableException e){
-            e.printStackTrace();
-        }
-    }
-
     private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
         for(int i = 0; i<notePanesRow.length; i++){
             notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i], channel);
@@ -176,7 +179,6 @@ public class MusicPlayer extends Application {
         primaryStage.show();
 
         KeyMapper.mapKeys(primaryStage.getScene());
-
     }
 
     public static void main(String[] args) {
