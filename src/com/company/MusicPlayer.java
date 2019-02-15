@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.sound.midi.MidiChannel;
@@ -71,19 +70,29 @@ public class MusicPlayer extends Application {
     public static NotePane[] notePanesRow4 = new NotePane[10];
 
     // note numbers to be passed to NotePanes after adding the baseNoteValue to it
+    // notes in order                      :  C  C# D  D# E  F  F# G  G# A  A#  B   C
+    // corresponding note nums modifiers   :  0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12
     private static int[] noteNumsRow1 ={15,16,17,18,19,20,21,22,23,24,25,26};
     private static int[] noteNumsRow2 ={10,11,12,13,14,15,16,17,18,19,20,21};
     private static int[] noteNumsRow3 ={5,6,7,8,9,10,11,12,13,14,15};
     private static int[] noteNumsRow4 ={0,1,2,3,4,5,6,7,8,9};
 
-    // notes in order                      :  C  C# D  D# E  F  F# G  G# A  A#  B   C
-    // corresponding note nums modifiers   :  0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12
 
+    static {
+        buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
+        buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
+        buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
+        buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
+    }
+
+    // pane building
     private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
         for(int i = 0; i<notePanesRow.length; i++){
             notePanesRow[i] = new NotePane(noteCharsRow[i], noteNumsRow[i], channel);
         }
     }
+
+    // pane placement from base value
     private static void placeNotePaneRow(NotePane[] notePanesRow, double originX, double originY){
         for(int i = 0; i<notePanesRow.length; i++){
             notePanesRow[i].relocate(originX+(NotePane.SIDE_LENGTH+5)*i, originY);
@@ -91,59 +100,86 @@ public class MusicPlayer extends Application {
         }
     }
 
-    static {
-        buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
+    // removes all NotePanes from root
+    private static void removeRowOfNotePanes(NotePane[] notePanes){
+        for(NotePane notePane : notePanes){
+            root.getChildren().remove(notePane);
+        }
+    }
+    private static void removeAllNotePanes(){
+        removeRowOfNotePanes(notePanesRow1);
+        removeRowOfNotePanes(notePanesRow2);
+        removeRowOfNotePanes(notePanesRow3);
+        removeRowOfNotePanes(notePanesRow4);
+    }
+
+    // first removes all NotePanes from root, then places them back in keyboard-like pattern
+    public static void arrangeNotePanesInKeyboardPattern(){
+        removeAllNotePanes();
         placeNotePaneRow(notePanesRow1, 45,170);
-        buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
         placeNotePaneRow(notePanesRow2, 70,225);
-        buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
         placeNotePaneRow(notePanesRow3, 85,280);
-        buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
         placeNotePaneRow(notePanesRow4, 110,335);
     }
 
+    // first removes all NotePanes from root, then places them back in grid-like pattern
+    public static void arrangeNotePanesInGridPattern(){
+        removeAllNotePanes();
+        placeNotePaneRow(notePanesRow1, 65,170);
+        placeNotePaneRow(notePanesRow2, 65,225);
+        placeNotePaneRow(notePanesRow3, 65,280);
+        placeNotePaneRow(notePanesRow4, 65,335);
+    }
+
+
+
     // pitch chooser
-    private static PitchChooser pitchChooser = new PitchChooser(50,30);
+    private static PitchChooser pitchChooser = new PitchChooser(70,30);
     static {
         root.getChildren().addAll(pitchChooser.getLabel(),pitchChooser);
     }
 
     // key chooser
-    private static KeyChooser keyChooser = new KeyChooser(130,30);
+    private static KeyChooser keyChooser = new KeyChooser(150,30);
     static {
         root.getChildren().addAll(keyChooser.getLabel(),keyChooser);
     }
 
     // scale chooser
-    private static ScaleChooser scaleChooser = new ScaleChooser(210,30);
+    private static ScaleChooser scaleChooser = new ScaleChooser(230,30);
     static {
         root.getChildren().addAll(scaleChooser.getLabel(),scaleChooser);
     }
 
     // instrument chooser
-    private static InstrumentChooser instrumentChooser = new InstrumentChooser(380,30);
+    private static InstrumentChooser instrumentChooser = new InstrumentChooser(400,30);
     static {
         root.getChildren().addAll(instrumentChooser.getLabel(),instrumentChooser);
     }
 
     // end notes on key release chooser
-    private static EndNotesOnKeyReleaseChooser endNotesOnKeyReleaseChooser = new EndNotesOnKeyReleaseChooser(550,30);
+    private static EndNotesOnKeyReleaseChooser endNotesOnKeyReleaseChooser = new EndNotesOnKeyReleaseChooser(570,30);
     static {
         root.getChildren().addAll(endNotesOnKeyReleaseChooser.getLabel(), endNotesOnKeyReleaseChooser);
     }
 
     // notes out of scale disable chooser
-    private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser(50,85);
+    private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser(70,85);
     static {
         root.getChildren().addAll(outOfScaleNotesDisabledChooser.getLabel(), outOfScaleNotesDisabledChooser);
     }
 
-    // velocity of the note released
-    private static VelocityChooser velocityChooser = new VelocityChooser(220,85);
+    // velocity of the note released chooser
+    private static VelocityChooser velocityChooser = new VelocityChooser(240,85);
     static {
         root.getChildren().addAll(velocityChooser.getLabel(),velocityChooser);
     }
 
+    // key pattern chooser
+    private static KeyPatternChooser keyPatternChooser = new KeyPatternChooser(350,85);
+    static {
+        root.getChildren().addAll(keyPatternChooser.getLabel(), keyPatternChooser);
+    }
 
 
     // updates all NotePanes after a change in the options
@@ -168,6 +204,7 @@ public class MusicPlayer extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        arrangeNotePanesInKeyboardPattern();
         KeyMapper.mapKeys(primaryStage.getScene());
     }
 

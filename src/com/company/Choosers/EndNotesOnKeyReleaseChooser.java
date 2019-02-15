@@ -17,7 +17,7 @@ public class EndNotesOnKeyReleaseChooser extends LabeledChooser {
 
     public EndNotesOnKeyReleaseChooser(int xLocation, int yLocation){
         super(xLocation, yLocation, "End notes on key release?");
-        setPrefWidth(130);
+        setPrefWidth(140);
         setItems(getOptions());
         setValue(getOptions().get(0));
 
