@@ -10,6 +10,22 @@ abstract public class AppButton extends Button {
 
     abstract public void onAction();
 
+    private void pressAnimation(){
+        new Thread(()->{
+            setScaleX(0.95);
+            setScaleY(0.95);
+            setDisable(true);
+            try{
+                Thread.sleep(120);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            setScaleX(1);
+            setScaleY(1);
+            setDisable(false);
+        }).start();
+    }
+
     public AppButton(int xLocation, int yLocation, String buttonText){
         relocate(xLocation,yLocation);
         setText(buttonText);
@@ -17,6 +33,9 @@ abstract public class AppButton extends Button {
         setBackground(new Background(new BackgroundFill(ColorPalette.CONTROLS_LIGHT_GREEN, new CornerRadii(5), null)));
         setBorder(new Border(new BorderStroke(ColorPalette.BTN_ON_BLUE, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(1))));
         setEffect(new DropShadow(5, Color.GRAY));
-        setOnAction(e->onAction());
+        setOnAction(e->{
+            onAction();
+            pressAnimation();
+        });
     }
 }
