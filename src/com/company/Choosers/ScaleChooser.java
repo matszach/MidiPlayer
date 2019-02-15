@@ -10,6 +10,12 @@ import java.util.Arrays;
 
 public class ScaleChooser extends LabeledChooser {
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(0));
+        OptionsHolder.setCurrentScale(OptionsHolder.nameToIntArray((String)getValue()));
+    }
+
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
         values.addAll(Arrays.asList(OptionsHolder.getScaleNames()));

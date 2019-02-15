@@ -7,6 +7,11 @@ import javafx.collections.ObservableList;
 
 public class EndNotesOnKeyReleaseChooser extends LabeledChooser {
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(0));
+        OptionsHolder.setEndNotesOnKeyRelease(Boolean.parseBoolean((String)getValue()));
+    }
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();

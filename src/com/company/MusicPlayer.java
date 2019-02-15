@@ -1,8 +1,10 @@
 package com.company;
 
 
+import com.company.Buttons.RestoreDefaultButton;
 import com.company.Choosers.*;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -77,13 +79,15 @@ public class MusicPlayer extends Application {
     private static int[] noteNumsRow3 ={5,6,7,8,9,10,11,12,13,14,15};
     private static int[] noteNumsRow4 ={0,1,2,3,4,5,6,7,8,9};
 
-
     static {
         buildNotePaneRow(notePanesRow1, KeyMapper.NOTE_CHARS_ROW_1, noteNumsRow1, channel1);
         buildNotePaneRow(notePanesRow2, KeyMapper.NOTE_CHARS_ROW_2, noteNumsRow2, channel2);
         buildNotePaneRow(notePanesRow3, KeyMapper.NOTE_CHARS_ROW_3, noteNumsRow3, channel3);
         buildNotePaneRow(notePanesRow4, KeyMapper.NOTE_CHARS_ROW_4, noteNumsRow4, channel4);
     }
+
+
+
 
     // pane building
     private static void buildNotePaneRow(NotePane[] notePanesRow, char[] noteCharsRow, int[] noteNumsRow, MidiChannel channel){
@@ -130,6 +134,8 @@ public class MusicPlayer extends Application {
         placeNotePaneRow(notePanesRow3, 65,280);
         placeNotePaneRow(notePanesRow4, 65,335);
     }
+
+
 
 
 
@@ -181,6 +187,12 @@ public class MusicPlayer extends Application {
         root.getChildren().addAll(keyPatternChooser.getLabel(), keyPatternChooser);
     }
 
+    // restore default button
+    private static RestoreDefaultButton restoreDefaultButton = new RestoreDefaultButton(610,105);
+    static {
+        root.getChildren().add(restoreDefaultButton);
+    }
+
 
     // updates all NotePanes after a change in the options
     public static void updateAllNotePanes(){
@@ -196,6 +208,22 @@ public class MusicPlayer extends Application {
         for(NotePane np : notePanesRow4){
             np.updateDisplay();
         }
+    }
+
+
+
+
+    // restore default values
+    public static void restoreDefault(){
+       pitchChooser.restoreDefaultValue();
+       keyChooser.restoreDefaultValue();
+       scaleChooser.restoreDefaultValue();
+       instrumentChooser.restoreDefaultValue();
+       endNotesOnKeyReleaseChooser.restoreDefaultValue();
+       outOfScaleNotesDisabledChooser.restoreDefaultValue();
+       velocityChooser.restoreDefaultValue();
+       keyPatternChooser.restoreDefaultValue();
+       updateAllNotePanes();
     }
 
     @Override

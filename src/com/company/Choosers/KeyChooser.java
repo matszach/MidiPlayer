@@ -9,6 +9,11 @@ import java.util.Arrays;
 
 public class KeyChooser extends LabeledChooser{
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(0));
+        OptionsHolder.setCurrentKeyNum(OptionsHolder.symbolToNoteNum((String)getValue()));
+    }
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();

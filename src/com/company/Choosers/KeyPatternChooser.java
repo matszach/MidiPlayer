@@ -6,6 +6,11 @@ import javafx.collections.ObservableList;
 
 public class KeyPatternChooser extends LabeledChooser{
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(0));
+        MusicPlayer.arrangeNotePanesInKeyboardPattern();
+    }
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();

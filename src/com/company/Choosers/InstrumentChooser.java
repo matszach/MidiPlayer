@@ -7,6 +7,12 @@ import javafx.collections.ObservableList;
 
 public class InstrumentChooser extends LabeledChooser {
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(0));
+        MusicPlayer.changeInstrument(extractInstrumentNumber());
+    }
+
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
         for(int i = 0; i <= 127; i++){

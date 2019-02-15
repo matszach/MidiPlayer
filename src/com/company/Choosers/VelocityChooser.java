@@ -7,6 +7,12 @@ import javafx.collections.ObservableList;
 
 public class VelocityChooser extends LabeledChooser {
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(9));
+        OptionsHolder.setNoteVelocity(Integer.parseInt((String)getValue()));
+    }
+
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
         for(int i = 10; i <= 200; i+=10){

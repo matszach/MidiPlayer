@@ -7,6 +7,12 @@ import javafx.collections.ObservableList;
 
 public class PitchChooser extends LabeledChooser {
 
+    @Override
+    public void restoreDefaultValue() {
+        setValue(getOptions().get(getOptions().size()/2));
+        OptionsHolder.adjustBaseNoteValue(Integer.parseInt((String)getValue()));
+    }
+
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
         for(int i = -36; i <= 36; i++){

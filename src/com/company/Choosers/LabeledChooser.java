@@ -11,6 +11,8 @@ import javafx.scene.text.Text;
 
 abstract public class LabeledChooser extends ComboBox {
 
+    abstract public void restoreDefaultValue();
+
     private Text label = new Text();
     public Text getLabel() {
         return label;
