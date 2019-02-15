@@ -1,15 +1,16 @@
-package com.company;
+package com.company.Choosers;
 
+import com.company.MusicPlayer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-public class InstrumentChooser extends Chooser {
+public class InstrumentChooser extends LabeledChooser {
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
         for(int i = 0; i <= 127; i++){
-            values.add(i+".  "+MusicPlayer.getSynthesizer().getLoadedInstruments()[i].getName());
+            values.add(i+".  "+ MusicPlayer.getSynthesizer().getLoadedInstruments()[i].getName());
         }
         return values;
     }
@@ -22,8 +23,8 @@ public class InstrumentChooser extends Chooser {
         return Integer.parseInt(itemNumString.toString());
     }
 
-    public InstrumentChooser(){
-        super();
+    public InstrumentChooser(int xLocation, int yLocation){
+        super(xLocation, yLocation, "Instrument:");
         setPrefWidth(150);
         setItems(getOptions());
         setValue(getOptions().get(0));

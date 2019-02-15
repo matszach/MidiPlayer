@@ -1,21 +1,23 @@
-package com.company;
+package com.company.Choosers;
 
+import com.company.MusicPlayer;
+import com.company.OptionsHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class KeyChooser extends Chooser{
+import java.util.Arrays;
+
+public class KeyChooser extends LabeledChooser{
 
 
     private static ObservableList<String> getOptions(){
         ObservableList<String> values = FXCollections.observableArrayList();
-        for(String note : OptionsHolder.getNoteSymbols()){
-            values.add(note);
-        }
+        values.addAll(Arrays.asList(OptionsHolder.getNoteSymbols()));
         return values;
     }
 
-    public KeyChooser(){
-        super();
+    public KeyChooser(int xLocation, int yLocation){
+        super(xLocation, yLocation, "Key:");
         setPrefWidth(60);
         setItems(getOptions());
         setValue(getOptions().get(0));

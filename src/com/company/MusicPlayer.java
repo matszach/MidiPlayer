@@ -1,6 +1,7 @@
 package com.company;
 
 
+import com.company.Choosers.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -102,66 +103,45 @@ public class MusicPlayer extends Application {
     }
 
     // pitch chooser
-    private static Text pitchChooserLabel = new Text("Pitch offset");
-    private static PitchChooser pitchChooser = new PitchChooser();
+    private static PitchChooser pitchChooser = new PitchChooser(50,30);
     static {
-        pitchChooserLabel.relocate(50,30);
-        pitchChooser.relocate(50, 50);
-        root.getChildren().addAll(pitchChooserLabel,pitchChooser);
+        root.getChildren().addAll(pitchChooser.getLabel(),pitchChooser);
     }
 
     // key chooser
-    private static Text keyChooserLabel = new Text("Key");
-    private static KeyChooser keyChooser = new KeyChooser();
+    private static KeyChooser keyChooser = new KeyChooser(130,30);
     static {
-        keyChooserLabel.relocate(130,30);
-        keyChooser.relocate(130, 50);
-        root.getChildren().addAll(keyChooserLabel,keyChooser);
+        root.getChildren().addAll(keyChooser.getLabel(),keyChooser);
     }
 
     // scale chooser
-    private static Text scaleChooserLabel = new Text("Scale");
-    private static ScaleChooser scaleChooser = new ScaleChooser();
+    private static ScaleChooser scaleChooser = new ScaleChooser(210,30);
     static {
-        scaleChooserLabel.relocate(210,30);
-        scaleChooser.relocate(210, 50);
-        root.getChildren().addAll(scaleChooserLabel,scaleChooser);
+        root.getChildren().addAll(scaleChooser.getLabel(),scaleChooser);
     }
 
     // instrument chooser
-    private static Text instrumentChooserLabel = new Text("Instrument");
-    private static InstrumentChooser instrumentChooser = new InstrumentChooser();
+    private static InstrumentChooser instrumentChooser = new InstrumentChooser(380,30);
     static {
-        instrumentChooserLabel.relocate(380,30);
-        instrumentChooser.relocate(380, 50);
-        root.getChildren().addAll(instrumentChooserLabel,instrumentChooser);
+        root.getChildren().addAll(instrumentChooser.getLabel(),instrumentChooser);
     }
 
     // end notes on key release chooser
-    private static Text endNotesOnKeyReleaseChooserLabel = new Text("End note on key release");
-    private static EndNotesOnKeyReleaseChooser endNotesOnKeyReleaseChooser = new EndNotesOnKeyReleaseChooser();
+    private static EndNotesOnKeyReleaseChooser endNotesOnKeyReleaseChooser = new EndNotesOnKeyReleaseChooser(550,30);
     static {
-        endNotesOnKeyReleaseChooserLabel.relocate(550,30);
-        endNotesOnKeyReleaseChooser.relocate(550, 50);
-        root.getChildren().addAll(endNotesOnKeyReleaseChooserLabel, endNotesOnKeyReleaseChooser);
+        root.getChildren().addAll(endNotesOnKeyReleaseChooser.getLabel(), endNotesOnKeyReleaseChooser);
     }
 
     // notes out of scale disable chooser
-    private static Text outOfScaleNotesDisabledChooserLabel = new Text("Out of scale notes disabled");
-    private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser();
+    private static OutOfScaleNotesDisabledChooser outOfScaleNotesDisabledChooser = new OutOfScaleNotesDisabledChooser(50,85);
     static {
-        outOfScaleNotesDisabledChooserLabel.relocate(50,90);
-        outOfScaleNotesDisabledChooser.relocate(50, 110);
-        root.getChildren().addAll(outOfScaleNotesDisabledChooserLabel, outOfScaleNotesDisabledChooser);
+        root.getChildren().addAll(outOfScaleNotesDisabledChooser.getLabel(), outOfScaleNotesDisabledChooser);
     }
 
     // velocity of the note released
-    private static Text velocityChooserLabel = new Text("Note velocity");
-    private static VelocityChooser velocityChooser = new VelocityChooser();
+    private static VelocityChooser velocityChooser = new VelocityChooser(220,85);
     static {
-        velocityChooserLabel.relocate(220,90);
-        velocityChooser.relocate(220,110);
-        root.getChildren().addAll(velocityChooserLabel,velocityChooser);
+        root.getChildren().addAll(velocityChooser.getLabel(),velocityChooser);
     }
 
 

@@ -39,16 +39,18 @@ public class OptionsHolder {
     }
 
     // scale names
-    private final static String[] scaleNames =
-            new String[]{"Major","Minor","Pentatonic Minor","Harmonic Minor","Hungarian Minor","Whole Tone","Diminished"};
+    private final static String[] scaleNames = new String[]{
+            "Major","Minor","Pentatonic Minor", "Blues","Harmonic Minor", "Hungarian Minor","Whole Tone","Diminished"
+    };
     public static String[] getScaleNames() {
         return scaleNames;
     }
-    public static int[] nameTointArray(String scaleName){
+    public static int[] nameToIntArray(String scaleName){
         switch (scaleName){
             case "Major" : return MAJOR;
             case "Minor" : return MINOR;
             case "Pentatonic Minor" : return PENTATONIC_MINOR;
+            case "Blues" : return BLUES;
             case "Harmonic Minor" : return HARMONIC_MINOR;
             case "Hungarian Minor" : return HUNGARIAN_MINOR;
             case "Whole Tone" : return WHOLE_TONE;
@@ -61,6 +63,7 @@ public class OptionsHolder {
     private static final int[] MAJOR = new int[]{0,2,4,5,7,9,11};
     private static final int[] MINOR = new int[]{0,2,3,5,7,8,10};
     private static final int[] PENTATONIC_MINOR = new int[]{0,3,5,7,10};
+    private static final int[] BLUES = new int[]{0,3,5,6,7,10};
     private static final int[] HARMONIC_MINOR = new int[]{0,2,3,5,7,8,11};
     private static final int[] HUNGARIAN_MINOR = new int[]{0,2,3,6,7,8,11};
     private static final int[] WHOLE_TONE = new int[]{0,2,4,6,8,10};

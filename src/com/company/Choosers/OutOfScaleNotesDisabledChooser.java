@@ -1,9 +1,11 @@
-package com.company;
+package com.company.Choosers;
 
+import com.company.MusicPlayer;
+import com.company.OptionsHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class OutOfScaleNotesDisabledChooser extends Chooser{
+public class OutOfScaleNotesDisabledChooser extends LabeledChooser{
 
 
     private static ObservableList<String> getOptions(){
@@ -13,8 +15,8 @@ public class OutOfScaleNotesDisabledChooser extends Chooser{
         return values;
     }
 
-    public OutOfScaleNotesDisabledChooser(){
-        super();
+    public OutOfScaleNotesDisabledChooser(int xLocation, int yLocation){
+        super(xLocation, yLocation, "Disable out of scale notes?");
         setPrefWidth(150);
         setItems(getOptions());
         setValue(getOptions().get(1));
